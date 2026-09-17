@@ -1,0 +1,7 @@
+streamlit
+tensorflow
+spacy
+groq
+python-dotenv
+scikit-learn
+numpy
