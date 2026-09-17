@@ -287,14 +287,19 @@ div[data-testid="stDataFrame"] {
 # ============================================================
 # API KEY
 # ============================================================
-GROQ_API_KEY = (
-    st.secrets["GROQ_API_KEY"]
-    if "GROQ_API_KEY" in st.secrets
-    else os.getenv("GROQ_API_KEY")
-)
+import os
+import streamlit as st
+from groq import Groq
+
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+
+if not GROQ_API_KEY:
+    try:
+        GROQ_API_KEY = st.secrets.get("GROQ_API_KEY")
+    except Exception:
+        GROQ_API_KEY = None
 
 groq_client = Groq(api_key=GROQ_API_KEY) if GROQ_API_KEY else None
-
 
 # ============================================================
 # LOAD MODELS
